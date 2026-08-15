@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  --font-syne: 'Syne', sans-serif;
+  --font-body: 'Libre Franklin', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-secondary-container: #86adff;
+  --color-on-tertiary-container: #988064;
+  --color-inverse-surface: #303031;
+  --color-tertiary-fixed: #fbdebd;
+  --color-error: #ba1a1a;
+  --color-on-error-container: #93000a;
+  --color-background: #fcf8fa;
+  --color-secondary-fixed: #d8e2ff;
+  --color-on-tertiary-fixed-variant: #56432b;
+  --color-system-orange: #E85A00;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-fixed: #001a42;
+  --color-on-tertiary: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-primary-fixed: #141c2b;
+  --color-surface-container-highest: #e4e2e3;
+  --color-on-secondary-container: #043e8a;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-background: #1b1b1d;
+  --color-surface: #fcf8fa;
+  --color-tertiary-fixed-dim: #dec2a3;
+  --color-on-primary-fixed-variant: #3f4758;
+  --color-inverse-primary: #bfc6db;
+  --color-primary-fixed-dim: #bfc6db;
+  --color-on-secondary-fixed-variant: #104490;
+  --color-on-surface: #1b1b1d;
+  --color-tertiary: #000000;
+  --color-primary-fixed: #dbe2f8;
+  --color-archive-white: #F7F5F0;
+  --color-outline: #76777d;
+  --color-inverse-on-surface: #f3f0f1;
+  --color-on-surface-variant: #45474c;
+  --color-secondary: #325ca9;
+  --color-primary-container: #141c2b;
+  --color-outline-grey: #737782;
+  --color-outline-variant: #c6c6cd;
+  --color-surface-variant: #e4e2e3;
+  --color-on-primary: #ffffff;
+  --color-tertiary-container: #271905;
+  --color-surface-tint: #575e70;
+  --color-surface-bright: #fcf8fa;
+  --color-surface-container: #f0edee;
+  --color-on-primary-container: #7c8497;
+  --color-on-error: #ffffff;
+  --color-surface-container-low: #f6f3f4;
+  --color-secondary-fixed-dim: #aec6ff;
+  --color-pure-white: #FFFFFF;
+  --color-surface-dim: #dcd9db;
+  --color-on-tertiary-fixed: #271905;
+  --color-surface-container-high: #eae7e9;
+  --color-primary: #000000;
+  --color-deep-navy: #001a42;
+}
+
+/* Base Body Grid Background matching Stitch source */
+body {
+  font-family: 'Libre Franklin', sans-serif;
+  background-color: #F7F5F0;
+  color: #1b1b1d;
+  overflow-x: hidden;
+}
+
+.brutalist-grid {
+  background-image: 
+    linear-gradient(to right, rgba(115, 119, 130, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(115, 119, 130, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.polaroid-scrap {
+  border: 8px solid white;
+  box-shadow: 4px 4px 0px 0px #001a42;
+  transition: all 0.3s ease;
+}
+
+.polaroid-scrap:hover {
+  transform: scale(1.02) rotate(0deg) !important;
+  filter: grayscale(0%);
+}
+
+.dossier-card {
+  background-color: white;
+  border: 1px solid #737782;
+  box-shadow: 4px 4px 0px 0px #001a42;
+}
+
+.btn-brutalist {
+  background-color: #001a42;
+  color: white;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-brutalist:hover {
+  background-color: #325ca9;
+}
+
+.btn-brutalist:active {
+  transform: scale(0.98);
+}
+
+.chamfered-box {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F5F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #737782;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E85A00;
+}
