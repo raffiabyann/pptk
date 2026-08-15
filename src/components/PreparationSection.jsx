@@ -19,7 +19,7 @@ export default function PreparationSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch">
-        {/* Left Column: Barang yang Dibutuhkan */}
+        {/* Left Column: BARANG YANG DIBUTUHKAN */}
         <div className="dossier-card p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h3 className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase mb-6 border-b border-[#737782]/20 pb-2 tracking-wider">
@@ -37,15 +37,47 @@ export default function PreparationSection() {
           </div>
         </div>
 
-        {/* Right Column: Pakaian yang Harus Digunakan */}
+        {/* Right Column: PAKAIAN YANG HARUS DIGUNAKAN */}
         <div className="dossier-card p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h3 className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase mb-6 border-b border-[#737782]/20 pb-2 tracking-wider">
               [ PAKAIAN YANG HARUS DIGUNAKAN ]
             </h3>
-            <p className="font-['Libre_Franklin'] text-base md:text-lg text-[#45474c] leading-relaxed">
+
+            <p className="font-['Libre_Franklin'] text-sm md:text-base text-[#45474c] leading-relaxed mb-6">
               Ketentuan pakaian dan atribut peserta PPTK 2026 mengikuti standar yang telah ditetapkan oleh OMB UMN.
             </p>
+
+            {/* Product Reference Visuals */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* ATASAN */}
+              <div className="bg-[#F7F5F0] p-3 border border-[#737782]/30 flex flex-col items-center justify-between rounded-sm">
+                <div className="h-32 sm:h-36 w-full flex items-center justify-center p-1">
+                  <img
+                    src="/assets/fotopakaian.png"
+                    alt="Atasan Polo Shirt Orange"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <span className="font-['JetBrains_Mono'] text-[11px] font-bold text-[#001a42] uppercase tracking-wider mt-2 border-t border-[#737782]/20 pt-1.5 w-full text-center">
+                  ATASAN
+                </span>
+              </div>
+
+              {/* BAWAHAN */}
+              <div className="bg-[#F7F5F0] p-3 border border-[#737782]/30 flex flex-col items-center justify-between rounded-sm">
+                <div className="h-32 sm:h-36 w-full flex items-center justify-center p-1">
+                  <img
+                    src="/assets/fotocelana.png"
+                    alt="Bawahan Celana Hitam"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <span className="font-['JetBrains_Mono'] text-[11px] font-bold text-[#001a42] uppercase tracking-wider mt-2 border-t border-[#737782]/20 pt-1.5 w-full text-center">
+                  BAWAHAN
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

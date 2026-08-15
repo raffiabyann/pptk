@@ -33,7 +33,7 @@ export default function Hero() {
       {/* Left Column: Headline & Action Buttons */}
       <div className="md:w-1/2 z-10 relative">
         <div className="inline-flex items-center gap-2 bg-[#E85A00] text-black font-['JetBrains_Mono'] text-xs font-bold px-3 py-1 mb-6 shadow-[2px_2px_0px_0px_#001a42] rotate-1">
-          <span className="w-2 h-2 rounded-full bg-black animate-ping"></span>
+          <span className="w-2 h-2 rounded-full bg-black"></span>
           PPTK 2026 // TEKNIK KOMPUTER UMN
         </div>
 

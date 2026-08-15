@@ -10,15 +10,14 @@ export default function CommitteeSection() {
     },
     {
       id: 'dokumentasi',
-      name: 'DOKUMENTASI',
-      leader: { name: 'Melvin Timothy', role: 'KOORDINATOR' },
-      members: ['Raffi Abyan Zizou', 'Darius Emmanuel Eudia Hariman'],
+      name: 'Dokumentasi',
+      members: ['Melvin Timothy', 'Raffi Abyan Zizou', 'Darius Emmanuel Eudia Hariman'],
     },
     {
       id: 'pic_acara',
-      name: 'PIC & ACARA',
-      leader: { name: 'Andri Abdul Aziz Jaha', role: 'KOORDINATOR' },
+      name: 'PIC & Acara',
       members: [
+        'Andri Abdul Aziz Jaha',
         'Kristian Keagan Lim',
         'Vito Amadeo D',
         'Milatul Arham',
@@ -28,9 +27,9 @@ export default function CommitteeSection() {
     },
     {
       id: 'keamanan',
-      name: 'KEAMANAN',
-      leader: { name: 'Muhammad Muzakki Rizqullah', role: 'KOORDINATOR' },
+      name: 'Keamanan',
       members: [
+        'Muhammad Muzakki Rizqullah',
         'Arizal Fathin Athallah',
         'Benedictus Alfredo Setiawijaya',
         'Jason Pedrosa',
@@ -39,25 +38,31 @@ export default function CommitteeSection() {
     },
     {
       id: 'perlengkapan',
-      name: 'PERLENGKAPAN',
-      leader: { name: 'Handri Suhandi', role: 'KOORDINATOR' },
+      name: 'Perlengkapan',
       members: [
+        'Handri Suhandi',
         'Milano Bonaventura Pandey',
         'Nicholas Claudio Hiu',
-        'Juan Christifen Lowandy',
+        'Juan Christifren Lowandy',
       ],
     },
     {
       id: 'pr_visual',
-      name: 'PR & VISUAL',
-      leader: { name: 'Zachary Sachriar Sechan', role: 'KOORDINATOR' },
-      members: ['Muhammad Syafa Adha', 'Aquijade Grace Paendong'],
+      name: 'PR & Visual',
+      members: [
+        'Zachary Sachriar Sechan',
+        'Muhammad Syafa Adha',
+        'Aquijade Grace Paendong',
+      ],
     },
   ];
 
   const [selectedDivId, setSelectedDivId] = useState('bph');
 
   const selectedDivision = committeeData.find((d) => d.id === selectedDivId) || committeeData[0];
+  const totalCount = selectedDivision.leader
+    ? selectedDivision.members.length + 1
+    : selectedDivision.members.length;
 
   return (
     <section className="mb-28 md:mb-32 px-4 md:px-16 max-w-7xl mx-auto w-full" id="committee">
@@ -88,27 +93,32 @@ export default function CommitteeSection() {
       </div>
 
       {/* Selected Division Members Panel */}
-      <div className="max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-[#001a42] shadow-[6px_6px_0px_0px_#001a42] chamfered-box animate-in fade-in duration-200">
-        <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] mb-4 border-b border-[#737782]/20 pb-2 flex items-center justify-between">
-          <span>// DIVISI PANITIA: {selectedDivision.name}</span>
-          <span className="text-[#325ca9] text-[11px]">{selectedDivision.members.length + 1} ANGGOTA</span>
+      <div className="max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-[#001a42] shadow-[6px_6px_0px_0px_#001a42] chamfered-box">
+        <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] mb-6 border-b border-[#737782]/20 pb-2 flex items-center justify-between">
+          <span>// DIVISI PANITIA: {selectedDivision.name.toUpperCase()}</span>
+          <span className="text-[#325ca9] text-[11px]">{totalCount} ANGGOTA</span>
         </div>
 
-        {/* Coordinator / Leader Card */}
-        <div className="bg-[#001a42] text-white p-5 md:p-6 shadow-[4px_4px_0px_0px_#E85A00] mb-6 border border-[#001a42] chamfered-box">
-          <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase tracking-wider mb-1">
-            {selectedDivision.leader.role}
+        {/* For BPH: Prominent Leader Card for Chandra Firdaus */}
+        {selectedDivision.leader && (
+          <div className="bg-[#001a42] text-white p-5 md:p-6 shadow-[4px_4px_0px_0px_#E85A00] mb-6 border border-[#001a42] chamfered-box">
+            <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase tracking-wider mb-1">
+              {selectedDivision.leader.role}
+            </div>
+            <h3 className="font-['Syne'] font-extrabold text-xl md:text-2xl uppercase text-white">
+              {selectedDivision.leader.name}
+            </h3>
           </div>
-          <h3 className="font-['Syne'] font-extrabold text-xl md:text-2xl uppercase text-white">
-            {selectedDivision.leader.name}
-          </h3>
-        </div>
+        )}
 
         {/* Members Grid */}
         <div>
-          <h4 className="font-['JetBrains_Mono'] text-xs font-bold text-[#45474c] uppercase tracking-wider mb-3 border-b border-[#737782]/20 pb-1">
-            MEMBERS
-          </h4>
+          {selectedDivision.leader && (
+            <h4 className="font-['JetBrains_Mono'] text-xs font-bold text-[#45474c] uppercase tracking-wider mb-3 border-b border-[#737782]/20 pb-1">
+              ANGGOTA BPH
+            </h4>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {selectedDivision.members.map((member, idx) => (
               <div

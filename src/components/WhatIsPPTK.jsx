@@ -17,12 +17,9 @@ export default function WhatIsPPTK() {
             </h2>
           </div>
 
-          <div className="lg:col-span-8 space-y-5 font-['Libre_Franklin'] text-base sm:text-lg text-[#333333] leading-relaxed border-l-4 border-[#E85A00] pl-6 md:pl-8">
+          <div className="lg:col-span-8 font-['Libre_Franklin'] text-base sm:text-lg text-[#333333] leading-relaxed border-l-4 border-[#E85A00] pl-6 md:pl-8">
             <p>
-              PPTK merupakan rangkaian kegiatan pengenalan Program Studi Teknik Komputer UMN yang membantu mahasiswa baru mengenal lingkungan akademik, budaya, dan berbagai bidang yang ada di Teknik Komputer.
-            </p>
-            <p>
-              Lewat rangkaian kegiatan ini, mahasiswa baru diajak mengenal lebih dekat kehidupan perkuliahan, teman satu angkatan, serta komunitas yang akan menjadi bagian dari perjalanan mereka di Teknik Komputer UMN.
+              PPTK merupakan rangkaian kegiatan pengenalan Program Studi Teknik Komputer UMN yang membantu mahasiswa baru mengenal lingkungan akademik, budaya, serta berbagai bidang yang ada di Teknik Komputer.
             </p>
           </div>
         </div>
