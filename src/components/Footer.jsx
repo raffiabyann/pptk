@@ -63,6 +63,17 @@ export default function Footer() {
             <span className="material-symbols-outlined text-sm">alternate_email</span>
             <span>@ppteknikkomputer.umn</span>
           </a>
+
+          {/* Direct WhatsApp Helpdesk Button */}
+          <a
+            href="https://wa.me/6285156850945?text=Halo%20Panitia%20PPTK%202026!%20Saya%20Mahasiswa%20Baru%20Teknik%20Komputer%202026%20ingin%20bertanya..."
+            target="_blank"
+            rel="noreferrer"
+            className="bg-[#00C300] hover:bg-[#00a800] text-white px-3.5 py-1.5 font-['JetBrains_Mono'] text-xs font-bold uppercase inline-flex items-center gap-2 chamfered-box transition-colors shadow-sm my-1"
+          >
+            <span className="material-symbols-outlined text-sm">chat</span>
+            <span>Tanya Panitia via WhatsApp ↗</span>
+          </a>
         </div>
 
         {/* Back to Top Button */}
