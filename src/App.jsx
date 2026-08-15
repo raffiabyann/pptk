@@ -9,7 +9,6 @@ import ReelsSection from './components/ReelsSection';
 import TimelineSection from './components/TimelineSection';
 import DivisionsSection from './components/DivisionsSection';
 import CommitteeSection from './components/CommitteeSection';
-import HelpdeskSection from './components/HelpdeskSection';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -29,7 +28,6 @@ export default function App() {
           <TimelineSection />
           <DivisionsSection />
           <CommitteeSection />
-          <HelpdeskSection />
         </main>
 
         {/* Footer */}
