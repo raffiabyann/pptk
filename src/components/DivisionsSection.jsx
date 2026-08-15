@@ -10,6 +10,7 @@ export default function DivisionsSection() {
     {
       name: 'TIMER',
       pic: 'PIC: VITO',
+      lineUrl: 'https://line.me/R/ti/g/sQUNujysbH',
       membersList: [
         'Fitto Abbie Chandra Sasmita',
         'Leonardy Lukman',
@@ -25,6 +26,7 @@ export default function DivisionsSection() {
     {
       name: 'PWM',
       pic: 'PIC: RIZKI',
+      lineUrl: 'https://line.me/R/ti/g/LJaM7c94cB',
       membersList: [
         'Raden Dimas Berly Nugraha',
         'Stiven Imanuel Lie',
@@ -39,6 +41,7 @@ export default function DivisionsSection() {
     {
       name: 'UART',
       pic: 'PIC: IMAM',
+      lineUrl: '#',
       membersList: [
         'Rasyid Gani Wibisono',
         'Angely Sarah',
@@ -53,6 +56,7 @@ export default function DivisionsSection() {
     {
       name: 'GPIO',
       pic: 'PIC: CLEMENT',
+      lineUrl: 'https://line.me/R/ti/g/P7gbtant6x',
       membersList: [
         'Raymond Kurniawan',
         'Shafira Felisya Chandra',
@@ -81,6 +85,13 @@ export default function DivisionsSection() {
     showToast(`Daftar anggota ${group.name} berhasil disalin!`, 'success');
   };
 
+  const handleLineClick = (e, group) => {
+    if (!group.lineUrl || group.lineUrl === '#') {
+      e.preventDefault();
+      showToast(`Link grup LINE ${group.name} akan segera diaktifkan oleh panitia.`, 'info');
+    }
+  };
+
   return (
     <section className="mb-28 md:mb-32 px-4 md:px-16 max-w-7xl mx-auto w-full" id="groups">
       <div className="text-center mb-8 md:mb-12">
@@ -88,7 +99,7 @@ export default function DivisionsSection() {
           GROUPS
         </h2>
         <p className="font-['Libre_Franklin'] text-sm text-[#45474c] mt-3">
-          Cari nama Anda untuk menemukan pembagian kelompok PPTK 2026.
+          Cari nama Anda untuk menemukan pembagian kelompok PPTK 2026 & gabung ke grup LINE.
         </p>
       </div>
 
@@ -149,7 +160,7 @@ export default function DivisionsSection() {
               </div>
 
               <div className="mt-6 pt-3 border-t border-[#737782]/20 font-['JetBrains_Mono'] text-[10px] font-bold text-[#325ca9] group-hover:text-[#E85A00]">
-                {group.membersList.length} ANGGOTA • LIHAT DETAIL →
+                {group.membersList.length} ANGGOTA • GABUNG GRUP LINE →
               </div>
             </div>
           ))}
@@ -197,13 +208,24 @@ export default function DivisionsSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={selectedGroupModal.lineUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => handleLineClick(e, selectedGroupModal)}
+                className="bg-[#00C300] hover:bg-[#00a800] text-white flex-1 py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase flex items-center justify-center gap-2 chamfered-box transition-colors shadow-md active:scale-95"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                Gabung Grup LINE
+              </a>
+
               <button
                 onClick={() => handleCopyMembers(selectedGroupModal)}
-                className="btn-brutalist flex-1 py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase flex items-center justify-center gap-2 chamfered-box"
+                className="btn-brutalist py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase flex items-center justify-center gap-2 chamfered-box"
                 title="Salin daftar nama anggota"
               >
                 <span className="material-symbols-outlined text-base">content_copy</span>
-                Salin Daftar Anggota
+                Salin
               </button>
 
               <button
