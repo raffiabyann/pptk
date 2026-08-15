@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
   const heroPhotos = [
-    '/assets/fotoperprod.jpeg',
+    '/assets/fotoperprod1.jpeg',
     '/assets/fotoperprod2.jpeg',
-    '/assets/stitch_img_1.jpg',
-    '/assets/stitch_img_2.jpg',
-    '/assets/stitch_img_3.jpg',
+    '/assets/fotoperprod3.jpeg',
+    '/assets/fotoperprod4.jpeg',
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
