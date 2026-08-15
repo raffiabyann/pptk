@@ -41,7 +41,7 @@ export default function DivisionsSection() {
     {
       name: 'UART',
       pic: 'PIC: IMAM',
-      lineUrl: '#',
+      lineUrl: 'https://line.me/R/ti/g/nTTqtTxxcT',
       membersList: [
         'Rasyid Gani Wibisono',
         'Angely Sarah',
