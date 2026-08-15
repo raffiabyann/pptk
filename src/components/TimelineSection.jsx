@@ -222,7 +222,7 @@ export default function TimelineSection() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white max-w-3xl w-full p-6 md:p-9 border-4 border-[#001a42] shadow-[10px_10px_0px_0px_#E85A00] relative chamfered-box animate-in zoom-in-95 duration-150 my-6"
+            className="bg-white max-w-3xl w-full p-5 sm:p-7 md:p-9 border-4 border-[#001a42] shadow-[10px_10px_0px_0px_#E85A00] relative chamfered-box animate-in zoom-in-95 duration-150 my-auto max-h-[90vh] overflow-y-auto"
           >
             {/* Close Button */}
             <button

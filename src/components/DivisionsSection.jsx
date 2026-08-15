@@ -159,11 +159,11 @@ export default function DivisionsSection() {
       {selectedGroupModal && (
         <div
           onClick={() => setSelectedGroupModal(null)}
-          className="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white max-w-lg w-full p-6 md:p-8 border-4 border-[#001a42] shadow-[8px_8px_0px_0px_#86adff] relative chamfered-box animate-in zoom-in-95 duration-150"
+            className="bg-white max-w-lg w-full p-5 md:p-8 border-4 border-[#001a42] shadow-[8px_8px_0px_0px_#86adff] relative chamfered-box animate-in zoom-in-95 duration-150 my-auto max-h-[90vh] overflow-y-auto"
           >
             <div className="flex justify-between items-center border-b border-[#737782]/30 pb-3 mb-4">
               <div>
