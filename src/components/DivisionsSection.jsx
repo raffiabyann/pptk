@@ -18,6 +18,7 @@ export default function DivisionsSection() {
         'Muhamad Rayhan Mubarok',
         'Gilbrant Akbar Algustav',
         'Chareza Kusuma Ardhana',
+        'Marsellino Rayhan S',
       ],
       description: 'Kelompok TIMER — Pengenalan Sistem Pewaktu Mikrokontroler & Hardware Timing.',
     },
