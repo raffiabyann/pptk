@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import WhatIsPPTK from './components/WhatIsPPTK';
 import RulesSection from './components/RulesSection';
 import PreparationSection from './components/PreparationSection';
+import ReelsSection from './components/ReelsSection';
 import TimelineSection from './components/TimelineSection';
 import DivisionsSection from './components/DivisionsSection';
 import CommitteeSection from './components/CommitteeSection';
@@ -23,6 +24,7 @@ export default function App() {
           <WhatIsPPTK />
           <RulesSection />
           <PreparationSection />
+          <ReelsSection />
           <TimelineSection />
           <DivisionsSection />
           <CommitteeSection />

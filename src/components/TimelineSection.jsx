@@ -1,23 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToast } from './Toast';
 
 export default function TimelineSection() {
   const { showToast } = useToast();
   const [activeEvent, setActiveEvent] = useState(null);
+  
+  // Checklist State for Main Event Ready Check
+  const [checkedItems, setCheckedItems] = useState({
+    dresscode: false,
+    cocard: false,
+    supplies: false,
+    stationery: false,
+    enthusiasm: false,
+  });
 
-  const zoomLink = 'https://us06web.zoom.us/j/83444725198?pwd=oY087Pp5JQrnwXQ3FwxU4OTDcXPidk.1';
-  const meetingId = '834 4472 5198';
-  const passcode = '343368';
+  // Countdown State to Aug 18, 2026 11:45 AM
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  const briefingRules = [
-    'Peserta wajib masuk Zoom tepat waktu.',
-    'Gunakan nama lengkap sesuai ketentuan yang telah diberikan.',
-    'Kamera menyesuaikan dengan arahan panitia.',
-    'Mikrofon dalam keadaan mute selama sesi berlangsung, kecuali jika dipersilakan untuk berbicara.',
-    'Harap menyimak materi dengan baik dan tidak meninggalkan Zoom tanpa alasan yang jelas.',
-    'Gunakan background Zoom yang telah disediakan.',
-    'Tidak diperkenankan melakukan hal-hal yang mengganggu jalannya sesi.',
-  ];
+  useEffect(() => {
+    const targetDate = new Date('2026-08-18T11:45:00+07:00').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const toggleChecklist = (key) => {
+    setCheckedItems((prev) => {
+      const nextState = { ...prev, [key]: !prev[key] };
+      const allChecked = Object.values(nextState).every(Boolean);
+      if (allChecked && !Object.values(prev).every(Boolean)) {
+        showToast('Kesiapan Hari-H PPTK 2026 telah 100% lengkap!', 'success');
+      }
+      return nextState;
+    });
+  };
+
+  const isAllReady = Object.values(checkedItems).every(Boolean);
 
   const events = [
     {
@@ -25,55 +60,67 @@ export default function TimelineSection() {
       stage: 'STAGE_01',
       title: 'Briefing Day',
       date: '15 Agt 2026',
-      time: '13.00 - 15.00 WIB (Zoom Dibuka: 12.45 WIB)',
-      mode: 'Daring / Zoom',
-      icon: 'video_camera_front',
-      dotColor: 'bg-[#E85A00]',
-      bgColor: 'bg-white',
-      textColor: 'text-[#000000]',
-      subTextColor: 'text-[#45474c]',
-      stageColor: 'text-[#86adff]',
+      time: '13.00 - 15.00 WIB (Zoom)',
+      mode: 'Daring / Zoom Meeting',
+      icon: 'check_circle',
+      completed: true,
+      badgeText: 'COMPLETED ✓',
+      dotColor: 'bg-[#00C300]',
+      bgColor: 'bg-[#f0edee]',
+      textColor: 'text-[#737782]',
+      subTextColor: 'text-[#737782]',
+      stageColor: 'text-[#737782]',
       description:
-        'Sesi pengenalan daring untuk briefing awal kegiatan PPTK 2026. Pembacaan tata tertib, penjelasan kelompok, pengenalan pembimbing/mentor, serta persiapan menuju Main Event.',
-      locationDetail: 'Platform Zoom Meeting (Klik untuk link & aturan)',
-      isBriefing: true,
+        'Sesi pengenalan daring awal kegiatan PPTK 2026. (Telah selesai dilaksanakan pada Sabtu, 15 Agustus 2026).',
+      locationDetail: 'Platform Zoom Meeting (Selesai)',
     },
     {
       id: 'EVT-002',
       stage: 'STAGE_02_MAIN',
-      title: 'Main Event',
-      date: '18 Agt 2026',
-      time: '11.45 - 16.50 WIB',
+      title: 'Main Event PPTK',
+      date: '18 Agt 2026 (After OMB)',
+      time: 'Penjemputan oleh Panitia Keamanan',
       mode: 'Luring / Kampus UMN',
-      icon: 'location_on',
-      dotColor: 'bg-[#ba1a1a]',
-      bgColor: 'bg-[#141c2b]',
+      icon: 'stars',
+      completed: false,
+      badgeText: 'NEXT EVENT',
+      dotColor: 'bg-[#E85A00]',
+      bgColor: 'bg-[#001a42]',
       textColor: 'text-white',
       subTextColor: 'text-[#f3f0f1]',
       stageColor: 'text-[#E85A00]',
       description:
-        'Acara utama perkenalan Program Studi Teknik Komputer UMN. Menampilkan talkshow pengenalan prodi & kurikulum, demo fasilitas Laboratorium Komputer/IoT/Network, serta pengenalan ACES UMN.',
+        'Acara utama perkenalan Program Studi Teknik Komputer UMN setelah sesi OMB. Penjemputan oleh Panitia Keamanan PPTK.',
       locationDetail: 'Gedung Utama Universitas Multimedia Nusantara (Luring)',
-      isBriefing: false,
     },
   ];
 
   const handleEventClick = (evt) => {
+    if (evt.completed) {
+      showToast(`Briefing Day (15 Agt 2026) telah selesai dilaksanakan.`, 'info');
+      return;
+    }
     setActiveEvent(evt);
   };
 
   const handleAddToCalendar = (evt) => {
     const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      'PPTK 2026 Teknik Komputer UMN - ' + evt.title
-    )}&details=${encodeURIComponent(evt.description)}&location=${encodeURIComponent(evt.locationDetail)}`;
+      'PPTK 2026 Teknik Komputer UMN - Main Event (After OMB)'
+    )}&details=${encodeURIComponent(
+      'Main Event Perpro Teknik Komputer 2026 UMN. Penjemputan oleh Panitia Keamanan PPTK setelah sesi OMB.'
+    )}&location=${encodeURIComponent(evt.locationDetail)}`;
     window.open(googleCalUrl, '_blank');
-    showToast(`Google Calendar dibuka untuk ${evt.title}!`, 'success');
+    showToast(`Google Calendar dibuka untuk Main Event PPTK 2026.`, 'success');
   };
 
-  const handleCopyZoomCreds = () => {
-    const text = `Link Zoom Briefing Day PPTK 2026:\n${zoomLink}\nMeeting ID: ${meetingId}\nPasscode: ${passcode}`;
-    navigator.clipboard.writeText(text);
-    showToast('Kredensial Zoom Briefing Day berhasil disalin!', 'success');
+  const scrollToPreparation = () => {
+    setActiveEvent(null);
+    const el = document.getElementById('preparation');
+    if (el) {
+      const yOffset = -90;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -83,7 +130,7 @@ export default function TimelineSection() {
           CRITICAL TIMELINES
         </h2>
         <p className="font-['JetBrains_Mono'] text-xs font-bold text-[#45474c] mt-4 uppercase tracking-widest">
-          [ UPCOMING INITIALIZATION EVENTS — KLIK KARTU UNTUK DETAIL ]
+          [ ROADMAP PPTK 2026 — KLIK MAIN EVENT UNTUK READY CHECK ]
         </p>
       </div>
 
@@ -93,17 +140,28 @@ export default function TimelineSection() {
           <div
             key={evt.id}
             onClick={() => handleEventClick(evt)}
-            className="dossier-card group cursor-pointer hover:-translate-y-2 transition-transform duration-300 relative"
+            className={`dossier-card group transition-all duration-300 relative ${
+              evt.completed
+                ? 'opacity-70 cursor-pointer hover:opacity-90'
+                : 'cursor-pointer hover:-translate-y-2 border-4 border-[#001a42]'
+            }`}
           >
-            <div className="h-6 bg-[#e4e2e3] border-b border-[#737782] flex items-center px-3 justify-between">
-              <div className="flex items-center">
+            {/* Top Bar Card Header */}
+            <div className="h-7 bg-[#e4e2e3] border-b border-[#737782] flex items-center px-3 justify-between font-['JetBrains_Mono'] text-[10px] font-bold">
+              <div className="flex items-center gap-2">
                 <div className={`w-2.5 h-2.5 rounded-full ${evt.dotColor}`}></div>
-                <span className="font-['JetBrains_Mono'] text-[10px] font-bold ml-2 text-[#45474c] uppercase tracking-widest">
+                <span className="text-[#45474c] uppercase">
                   RECORD_ID: {evt.id}
                 </span>
               </div>
-              <span className="font-['JetBrains_Mono'] text-[10px] font-bold text-[#E85A00] flex items-center gap-1">
-                KLIK UTK DETAIL →
+              <span
+                className={`px-2 py-0.5 uppercase ${
+                  evt.completed
+                    ? 'bg-gray-300 text-gray-700'
+                    : 'bg-[#E85A00] text-black font-extrabold'
+                }`}
+              >
+                {evt.badgeText}
               </span>
             </div>
 
@@ -114,11 +172,13 @@ export default function TimelineSection() {
                 </span>
               </div>
 
-              <div className={`font-['JetBrains_Mono'] text-xs font-bold mb-2 uppercase tracking-wider ${evt.stageColor}`}>
+              <div
+                className={`font-['JetBrains_Mono'] text-xs font-bold mb-2 uppercase tracking-wider ${evt.stageColor}`}
+              >
                 [ {evt.stage} ]
               </div>
 
-              <h3 className={`font-['Syne'] font-bold text-2xl md:text-3xl mb-4 uppercase ${evt.textColor}`}>
+              <h3 className={`font-['Syne'] font-extrabold text-2xl md:text-3xl mb-4 uppercase ${evt.textColor}`}>
                 {evt.title}
               </h3>
 
@@ -128,187 +188,228 @@ export default function TimelineSection() {
                   <span className="font-bold">{evt.date}</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#737782]">schedule</span>
+                  <span className="material-symbols-outlined text-[#86adff]">schedule</span>
                   <span>{evt.time}</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[#737782]">
-                    {evt.mode.includes('Zoom') ? 'desktop_windows' : 'pin_drop'}
-                  </span>
+                  <span className="material-symbols-outlined text-[#737782]">pin_drop</span>
                   <span>{evt.mode}</span>
                 </li>
               </ul>
 
-              {evt.isBriefing && (
-                <div className="mt-6 pt-3 border-t border-[#737782]/30 font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] flex items-center justify-between">
-                  <span>⚡ ZOOM LINK & ATURAN TERSEDIA</span>
-                  <span>KLIK KARTU →</span>
-                </div>
-              )}
+              <div className="mt-6 pt-3 border-t border-[#737782]/30 font-['JetBrains_Mono'] text-xs font-bold flex items-center justify-between">
+                {evt.completed ? (
+                  <span className="text-[#00C300] flex items-center gap-1">
+                    <span className="material-symbols-outlined text-base">check_circle</span>
+                    SELESAI (15 AGT)
+                  </span>
+                ) : (
+                  <span className="text-[#E85A00] flex items-center gap-1 group-hover:underline">
+                    KLIK UNTUK ALUR & CHECKLIST →
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Event Detail Modal (Appears when clicking Briefing Day or Main Event) */}
-      {activeEvent && (
+      {/* Main Event Interactive Modal */}
+      {activeEvent && !activeEvent.completed && (
         <div
           onClick={() => setActiveEvent(null)}
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 backdrop-blur-md overflow-y-auto"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white max-w-4xl w-full p-6 md:p-10 border-4 border-[#001a42] shadow-[10px_10px_0px_0px_#001a42] relative chamfered-box animate-in zoom-in-95 duration-150 my-6"
+            className="bg-white max-w-3xl w-full p-6 md:p-9 border-4 border-[#001a42] shadow-[10px_10px_0px_0px_#E85A00] relative chamfered-box animate-in zoom-in-95 duration-150 my-6"
           >
             {/* Close Button */}
             <button
               onClick={() => setActiveEvent(null)}
-              className="absolute top-4 right-4 bg-[#001a42] text-white p-2 chamfered-box hover:bg-[#E85A00] transition-colors z-10"
+              className="absolute top-4 right-4 bg-[#001a42] text-white p-2 chamfered-box hover:bg-[#E85A00] hover:text-black transition-colors z-10"
               title="Tutup Modal"
             >
               <span className="material-symbols-outlined text-xl">close</span>
             </button>
 
-            {activeEvent.isBriefing ? (
-              /* Briefing Day Detailed Layout matching design reference */
-              <div>
-                {/* Header & Zoom Badge */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-3 h-3 rounded-full bg-[#E85A00]"></span>
-                    <h3 className="font-['Syne'] font-extrabold text-2xl md:text-4xl text-[#000000] uppercase tracking-tight">
-                      BRIEFING DAY — 15 AGUSTUS 2026
-                    </h3>
+            {/* Header */}
+            <div className="mb-6 border-b border-[#737782]/30 pb-4">
+              <div className="flex items-center gap-2 mb-2 font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00]">
+                <span>OPERATION DIRECTIVE // STAGE_02_MAIN</span>
+              </div>
+              <h3 className="font-['Syne'] font-extrabold text-2xl md:text-3xl text-[#000000] uppercase tracking-tight">
+                MAIN EVENT PPTK — 18 AGUSTUS 2026
+              </h3>
+              <p className="font-['Libre_Franklin'] text-xs md:text-sm text-[#45474c] mt-1">
+                Rangkaian perkenalan prodi Teknik Komputer UMN setelah kegiatan OMB UMN.
+              </p>
+            </div>
+
+            {/* Live Countdown Banner */}
+            <div className="bg-[#001a42] text-white p-4 mb-6 border-l-4 border-[#E85A00] chamfered-box">
+              <div className="font-['JetBrains_Mono'] text-[11px] font-bold text-[#E85A00] uppercase mb-1 tracking-wider">
+                COUNTDOWN TO MAIN EVENT:
+              </div>
+              <div className="font-['JetBrains_Mono'] text-lg sm:text-2xl font-extrabold tracking-widest text-[#86adff]">
+                {timeLeft.days}D : {timeLeft.hours}H : {timeLeft.minutes}M : {timeLeft.seconds}S
+              </div>
+            </div>
+
+            {/* Visual Step Flow (Without Exact Hours) */}
+            <div className="mb-6">
+              <h4 className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase tracking-wider mb-3">
+                [ ALUR KEGIATAN HARI-H (18 AGT) ]
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {/* Step 1 */}
+                <div className="bg-[#F7F5F0] p-3.5 border border-[#737782]/30 chamfered-box">
+                  <div className="font-['JetBrains_Mono'] text-[10px] font-bold text-[#325ca9] mb-1">
+                    STEP 01 // PAGI
                   </div>
-                  <div className="inline-block bg-[#001a42] text-white font-['JetBrains_Mono'] text-xs font-bold px-3 py-1 chamfered-box">
-                    ZOOM DIBUKA: 12.45 WIB
-                  </div>
+                  <h5 className="font-['Syne'] font-bold text-sm text-[#000000] mb-1">
+                    Sesi OMB UMN
+                  </h5>
+                  <p className="font-['Libre_Franklin'] text-[11px] text-[#45474c] leading-relaxed">
+                    Peserta mengikuti seluruh rangkaian Orientasi Mahasiswa Baru (OMB) UMN dengan tertib.
+                  </p>
                 </div>
 
-                {/* Agenda ISHOMA Notice */}
-                <div className="bg-[#86adff]/15 border-l-4 border-[#325ca9] p-4 mb-6 font-['Libre_Franklin'] text-sm md:text-base text-[#001a42]">
-                  <span className="font-bold">INFORMASI AGENDA:</span> Setelah sesi informasi OMB selesai, peserta diperbolehkan untuk <span className="font-bold underline">ISHOMA</span> terlebih dahulu sebelum masuk ke sesi Briefing.
+                {/* Step 2 */}
+                <div className="bg-[#F7F5F0] p-3.5 border-2 border-[#E85A00] chamfered-box shadow-sm">
+                  <div className="font-['JetBrains_Mono'] text-[10px] font-bold text-[#E85A00] mb-1">
+                    STEP 02 // PENJEMPUTAN
+                  </div>
+                  <h5 className="font-['Syne'] font-bold text-sm text-[#000000] mb-1">
+                    Penjemputan Panitia
+                  </h5>
+                  <p className="font-['Libre_Franklin'] text-[11px] text-[#45474c] leading-relaxed">
+                    Peserta akan dijemput oleh <strong>Panitia Keamanan PPTK</strong> di titik kumpul menuju area PPTK.
+                  </p>
                 </div>
 
-                {/* Zoom Credentials Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-                  {/* Left Column: Link & Credentials */}
-                  <div className="lg:col-span-7 bg-[#F7F5F0] p-5 border border-[#737782]/40 flex flex-col justify-between rounded-sm">
-                    <div>
-                      <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase mb-3 tracking-wider">
-                        [ ACCESS LINK ZOOM ]
-                      </div>
-                      <p className="font-['JetBrains_Mono'] text-xs text-[#325ca9] break-all mb-4 bg-white p-3 border border-[#737782]/30">
-                        {zoomLink}
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-3 font-['JetBrains_Mono'] text-xs">
-                        <div className="bg-white p-3 border border-[#737782]/30">
-                          <span className="text-[#737782] block text-[10px]">MEETING ID:</span>
-                          <span className="font-bold text-[#000000] text-sm md:text-base">{meetingId}</span>
-                        </div>
-                        <div className="bg-white p-3 border border-[#737782]/30">
-                          <span className="text-[#737782] block text-[10px]">PASSCODE:</span>
-                          <span className="font-bold text-[#E85A00] text-sm md:text-base">{passcode}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 mt-6">
-                      <a
-                        href={zoomLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-brutalist flex-1 py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase inline-flex items-center justify-center gap-2 chamfered-box"
-                      >
-                        <span className="material-symbols-outlined text-base">video_call</span>
-                        Gabung Zoom Meeting
-                      </a>
-                      <button
-                        onClick={handleCopyZoomCreds}
-                        className="bg-white text-[#001a42] border-2 border-[#001a42] px-4 py-3 font-['JetBrains_Mono'] text-xs font-bold uppercase hover:bg-[#e4e2e3] transition-colors inline-flex items-center justify-center gap-2 chamfered-box"
-                      >
-                        <span className="material-symbols-outlined text-base">content_copy</span>
-                        Salin Kredensial
-                      </button>
-                    </div>
+                {/* Step 3 */}
+                <div className="bg-[#F7F5F0] p-3.5 border border-[#737782]/30 chamfered-box">
+                  <div className="font-['JetBrains_Mono'] text-[10px] font-bold text-[#325ca9] mb-1">
+                    STEP 03 // SIANG - SELESAI
                   </div>
-
-                  {/* Right Column: Virtual Background Notice */}
-                  <div className="lg:col-span-5 bg-[#001a42] text-white p-5 border border-[#001a42] flex flex-col justify-between chamfered-box">
-                    <div>
-                      <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase mb-3 tracking-wider">
-                        [ VIRTUAL BACKGROUND ]
-                      </div>
-                      <p className="font-['Libre_Franklin'] text-sm leading-relaxed mb-4 text-[#f3f0f1]">
-                        Peserta wajib/diperkenankan menggunakan Virtual Background Zoom yang telah disediakan oleh panitia PPTK 2026 selama sesi informasi berlangsung.
-                      </p>
-                    </div>
-                    <div className="border-t border-[#737782]/40 pt-3 font-['JetBrains_Mono'] text-[11px] text-[#86adff]">
-                      // PPTK 2026 OFFICIAL BRIEFING
-                    </div>
-                  </div>
-                </div>
-
-                {/* Aturan Selama Sesi Informasi */}
-                <div>
-                  <h4 className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] uppercase tracking-wider mb-4 border-b border-[#737782]/20 pb-2">
-                    [ ATURAN SELAMA SESI INFORMASI ]
-                  </h4>
-                  <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 font-['Libre_Franklin'] text-sm text-[#333333]">
-                    {briefingRules.map((rule, idx) => (
-                      <li key={idx} className="bg-[#F7F5F0] p-3.5 border border-[#737782]/30 flex items-start gap-3 rounded-sm">
-                        <span className="font-['JetBrains_Mono'] font-bold text-[#E85A00] text-xs mt-0.5 shrink-0">
-                          0{idx + 1}.
-                        </span>
-                        <span>{rule}</span>
-                      </li>
-                    ))}
-                  </ol>
+                  <h5 className="font-['Syne'] font-bold text-sm text-[#000000] mb-1">
+                    PPTK Main Event
+                  </h5>
+                  <p className="font-['Libre_Franklin'] text-[11px] text-[#45474c] leading-relaxed">
+                    Pengenalan prodi Tekkom UMN, demo laboratorium & hardware, serta sesi keakraban mentor & HIMTEK.
+                  </p>
                 </div>
               </div>
-            ) : (
-              /* Main Event Modal */
-              <div>
-                <div className="font-['JetBrains_Mono'] text-xs font-bold text-[#E85A00] mb-1">
-                  // RECORD: {activeEvent.id} [{activeEvent.stage}]
-                </div>
-                <h3 className="font-['Syne'] font-extrabold text-2xl md:text-3xl text-[#000000] uppercase mb-4">
-                  {activeEvent.title}
-                </h3>
+            </div>
 
-                <p className="font-['Libre_Franklin'] text-base text-[#45474c] leading-relaxed mb-6">
-                  {activeEvent.description}
-                </p>
-
-                <div className="bg-[#f0edee] p-5 border border-[#737782]/30 mb-6 font-['JetBrains_Mono'] text-xs space-y-3">
-                  <div className="flex items-center gap-2 text-[#000000]">
-                    <span className="material-symbols-outlined text-[#E85A00]">calendar_today</span>
-                    <span className="font-bold text-sm">{activeEvent.date} ({activeEvent.time})</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#45474c]">
-                    <span className="material-symbols-outlined text-[#325ca9]">place</span>
-                    <span className="text-sm">{activeEvent.locationDetail}</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={() => handleAddToCalendar(activeEvent)}
-                    className="btn-brutalist flex-1 py-3.5 font-['JetBrains_Mono'] text-xs font-bold uppercase flex items-center justify-center gap-2"
-                  >
-                    <span className="material-symbols-outlined text-base">event</span>
-                    Tambah ke Google Calendar
-                  </button>
-                  <button
-                    onClick={() => setActiveEvent(null)}
-                    className="bg-[#e4e2e3] text-black border border-[#737782] px-6 py-3.5 font-['JetBrains_Mono'] text-xs font-bold uppercase hover:bg-white"
-                  >
-                    Tutup
-                  </button>
-                </div>
+            {/* Interactive Hari-H Ready Check */}
+            <div className="mb-6 bg-[#F7F5F0] p-4 md:p-5 border border-[#737782]/40">
+              <div className="flex items-center justify-between mb-3 border-b border-[#737782]/20 pb-2">
+                <h4 className="font-['JetBrains_Mono'] text-xs font-bold text-[#001a42] uppercase tracking-wider">
+                  ☑ HARI-H READY CHECKLIST
+                </h4>
+                <span className="font-['JetBrains_Mono'] text-[11px] font-bold text-[#E85A00]">
+                  {Object.values(checkedItems).filter(Boolean).length} / 5 COMPLETED
+                </span>
               </div>
-            )}
+
+              <div className="space-y-2.5 font-['Libre_Franklin'] text-xs md:text-sm text-[#101827]">
+                <label className="flex items-center gap-3 cursor-pointer select-none hover:text-[#E85A00]">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.dresscode}
+                    onChange={() => toggleChecklist('dresscode')}
+                    className="w-4 h-4 accent-[#E85A00] rounded cursor-pointer"
+                  />
+                  <span className={checkedItems.dresscode ? 'line-through text-[#737782]' : 'font-semibold'}>
+                    Dresscode OMB (Polo Berkerah + Celana Bahan + Sepatu Kets Bertali)
+                  </span>
+                </label>
+
+                <label className="flex items-center gap-3 cursor-pointer select-none hover:text-[#E85A00]">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.cocard}
+                    onChange={() => toggleChecklist('cocard')}
+                    className="w-4 h-4 accent-[#E85A00] rounded cursor-pointer"
+                  />
+                  <span className={checkedItems.cocard ? 'line-through text-[#737782]' : 'font-semibold'}>
+                    Co-Card / Name Tag Identitas OMB
+                  </span>
+                </label>
+
+                <label className="flex items-center gap-3 cursor-pointer select-none hover:text-[#E85A00]">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.supplies}
+                    onChange={() => toggleChecklist('supplies')}
+                    className="w-4 h-4 accent-[#E85A00] rounded cursor-pointer"
+                  />
+                  <span className={checkedItems.supplies ? 'line-through text-[#737782]' : 'font-semibold'}>
+                    Bekal Makan Siang & Botol Minum (Tumbler) di dalam tas
+                  </span>
+                </label>
+
+                <label className="flex items-center gap-3 cursor-pointer select-none hover:text-[#E85A00]">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.stationery}
+                    onChange={() => toggleChecklist('stationery')}
+                    className="w-4 h-4 accent-[#E85A00] rounded cursor-pointer"
+                  />
+                  <span className={checkedItems.stationery ? 'line-through text-[#737782]' : 'font-semibold'}>
+                    Buku Catatan & Alat Tulis Lengkap
+                  </span>
+                </label>
+
+                <label className="flex items-center gap-3 cursor-pointer select-none hover:text-[#E85A00]">
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.enthusiasm}
+                    onChange={() => toggleChecklist('enthusiasm')}
+                    className="w-4 h-4 accent-[#E85A00] rounded cursor-pointer"
+                  />
+                  <span className={checkedItems.enthusiasm ? 'line-through text-[#737782]' : 'font-semibold'}>
+                    Semangat & Siap kenalan dengan teman & mentor Teknik Komputer
+                  </span>
+                </label>
+              </div>
+
+              {/* All Ready Status Banner */}
+              {isAllReady && (
+                <div className="mt-4 p-3 bg-[#00C300]/15 border-l-4 border-[#00C300] text-[#006400] font-['JetBrains_Mono'] text-xs font-bold flex items-center justify-between animate-in zoom-in-95">
+                  <span>STATUS: 100% READY FOR MAIN EVENT PPTK 2026.</span>
+                  <span className="material-symbols-outlined text-base">verified</span>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => handleAddToCalendar(activeEvent)}
+                className="btn-brutalist flex-1 py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase flex items-center justify-center gap-2 chamfered-box"
+              >
+                <span className="material-symbols-outlined text-base">calendar_add_on</span>
+                Tambah ke Google Calendar
+              </button>
+
+              <button
+                onClick={scrollToPreparation}
+                className="bg-white text-[#001a42] border-2 border-[#001a42] py-3 px-4 font-['JetBrains_Mono'] text-xs font-bold uppercase hover:bg-[#e4e2e3] flex items-center justify-center gap-2 chamfered-box"
+              >
+                <span className="material-symbols-outlined text-base">checkroom</span>
+                Cek Dresscode & Perlengkapan
+              </button>
+
+              <button
+                onClick={() => setActiveEvent(null)}
+                className="bg-[#e4e2e3] text-black border border-[#737782] px-4 py-3 font-['JetBrains_Mono'] text-xs font-bold uppercase hover:bg-white chamfered-box"
+              >
+                Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}
