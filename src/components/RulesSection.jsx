@@ -40,17 +40,13 @@ export default function RulesSection() {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 mb-28 md:mb-32 relative items-center px-4 md:px-16 max-w-7xl mx-auto w-full" id="guide">
-      {/* Left Column: Image with Tag */}
-      <div className="md:col-span-5 relative h-[420px] sm:h-[500px] md:h-[580px] order-2 md:order-1 w-full">
+      {/* Left Column: Official Transparent PPTK Logo Display */}
+      <div className="md:col-span-5 relative flex items-center justify-center p-8 md:p-12 bg-white border-2 border-[#001a42] shadow-[6px_6px_0px_0px_#001a42] chamfered-box order-2 md:order-1 w-full min-h-[320px] sm:min-h-[400px]">
         <img
-          className="w-full h-full object-cover polaroid-scrap rotate-1 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
-          alt="Engineering Students Studying in Lab"
-          src="/assets/stitch_img_1.jpg"
-          onClick={() => showToast('Foto Dokumentasi Lab 402 Teknik Komputer UMN', 'info')}
+          className="w-full max-w-[280px] sm:max-w-[340px] h-auto object-contain transition-transform duration-300 hover:scale-105"
+          alt="Official PPTK 2026 Logo"
+          src="/logopptk.png"
         />
-        <div className="absolute top-4 left-4 bg-[#E85A00] px-3 py-1 font-['JetBrains_Mono'] text-xs font-bold text-black shadow-md border border-black">
-          [ FIG. 01 - LAB 402 ]
-        </div>
       </div>
 
       {/* Right Column: Rules Content */}
