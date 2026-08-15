@@ -193,9 +193,7 @@ export default function DivisionsSection() {
               </button>
             </div>
 
-            <p className="font-['Libre_Franklin'] text-xs text-[#737782] mb-4">
-              {selectedGroupModal.description}
-            </p>
+
 
             {/* LINE Group Joining CTA */}
             <div className="bg-[#00C300]/10 border-l-4 border-[#00C300] p-3.5 mb-5 flex items-center justify-between gap-3 chamfered-box">

@@ -48,9 +48,7 @@ export default function RulesSection() {
           src="/assets/stitch_img_1.jpg"
           onClick={() => showToast('Foto Dokumentasi Lab 402 Teknik Komputer UMN', 'info')}
         />
-        <div className="absolute top-4 left-4 bg-[#E85A00] px-3 py-1 font-['JetBrains_Mono'] text-xs font-bold text-black shadow-md border border-black">
-          [ FIG. 01 - LAB 402 ]
-        </div>
+
       </div>
 
       {/* Right Column: Rules Content */}
