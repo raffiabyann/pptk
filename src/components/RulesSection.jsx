@@ -43,10 +43,9 @@ export default function RulesSection() {
       {/* Left Column: Image with Tag */}
       <div className="md:col-span-5 relative h-[420px] sm:h-[500px] md:h-[580px] order-2 md:order-1 w-full">
         <img
-          className="w-full h-full object-cover polaroid-scrap rotate-1 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
+          className="w-full h-full object-cover polaroid-scrap rotate-1 grayscale hover:grayscale-0 transition-all duration-500"
           alt="Engineering Students Studying in Lab"
           src="/assets/stitch_img_1.jpg"
-          onClick={() => showToast('Foto Dokumentasi Lab 402 Teknik Komputer UMN', 'info')}
         />
 
       </div>
