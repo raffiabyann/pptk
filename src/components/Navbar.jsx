@@ -15,24 +15,24 @@ export default function Navbar() {
     { id: 'aces', label: 'ACES', href: '#aces' },
   ];
 
-  // Active section scroll observer
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'guide', 'preparation', 'reels', 'events', 'groups', 'committee', 'aces'];
-      const scrollPosition = window.scrollY + 200;
+
+      if (window.scrollY < 400) {
+        setActiveSection('hero');
+        return;
+      }
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
-        if (sectionId === 'hero') {
-          if (window.scrollY < 400) {
-            setActiveSection('hero');
-            break;
-          }
-        } else {
-          const el = document.getElementById(sectionId);
-          if (el && el.offsetTop <= scrollPosition) {
+        if (sectionId === 'hero') continue;
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
             setActiveSection(sectionId);
-            break;
+            return;
           }
         }
       }
@@ -47,8 +47,11 @@ export default function Navbar() {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [mobileMenuOpen]);
 
   const handleNavClick = (e, href, id) => {

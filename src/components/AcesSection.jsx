@@ -117,8 +117,11 @@ export default function AcesSection() {
     if (activeModalDiv) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [activeModalDiv]);
 
   useEffect(() => {
@@ -346,7 +349,7 @@ export default function AcesSection() {
 
             {/* Image Area — swipeable */}
             <div
-              className="flex-grow bg-[#F7F5F0] relative flex items-center justify-center p-4"
+              className="bg-[#F7F5F0] relative flex items-center justify-center p-4 h-[50vh] md:h-[55vh]"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -354,7 +357,7 @@ export default function AcesSection() {
                 key={currentSlideIdx}
                 src={currentSlide?.url}
                 alt={currentSlide?.name}
-                className="max-h-[45vh] md:max-h-[50vh] max-w-full w-auto object-contain animate-in fade-in duration-200"
+                className="max-h-full max-w-full object-contain"
               />
 
               {activeModalDiv.slides.length > 1 && (
