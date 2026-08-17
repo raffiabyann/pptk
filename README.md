@@ -1,105 +1,75 @@
-# ⚡ PPTK 2026 — Pengenalan Prodi Teknik Komputer UMN
+# PPTK 2026 — Pengenalan Prodi Teknik Komputer UMN
 
-[![React 19](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
-[![Vite 6](https://img.shields.io/badge/Vite-6.2.0-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev)
-[![TailwindCSS v4](https://img.shields.io/badge/TailwindCSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)]()
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
-Digital archive, roadmap interaktif, dan panduan visual perkenalan prodi untuk mahasiswa baru **Teknik Komputer Universitas Multimedia Nusantara (UMN) 2026**.
+Website resmi orientasi Program Studi Teknik Komputer Universitas Multimedia Nusantara (UMN) angkatan 2026. Berisi panduan kegiatan, timeline, informasi kelompok, profil panitia, serta profil himpunan **ACES** (Association of Computer Engineering Students).
 
-Website ini mengusung bahasa desain **Neo-Brutalist Industrial / Tech Dossier** yang tajam, modern, responsif penuh di perangkat seluler (*mobile-first*), dan minim clutter.
+## Fitur
 
----
+- **Panduan & Tata Tertib** — Informasi dresscode, barang bawaan, dan peraturan peserta
+- **Timeline Kegiatan** — Roadmap acara dengan countdown timer dan interactive checklist
+- **Cari Kelompok** — Pencarian nama mahasiswa baru dan daftar anggota per kelompok
+- **Panitia PPTK** — Struktur dan daftar panitia PPTK 2026
+- **Profil ACES** — Pengenalan himpunan ACES Gen XVI, divisi, pengurus, dan ACES Muda dengan lightbox gallery foto
 
-## 🌟 Fitur Utama
+## Tech Stack
 
-- 🏠 **Hero Showcase & Live Countdown**  
-  Headline utama *"FACE THE UNKNOWN. UNLOCK YOUR POTENTIAL."* dilengkapi slideshow otomatis dokumentasi kegiatan PPTK.
-- 📖 **What is PPTK & Guidelines**  
-  Penjelasan singkat seputar orientasi prodi dan tata tertib lengkap peserta.
-- 👔 **Dresscode & Preparation Guide**  
-  Panduan visual 3 atribut utama (**Atasan Polo**, **Celana Bahan**, dan **Sepatu Kets Bertali**) serta daftar barang yang wajib dibawa.
-- 🎬 **Instagram Reels Highlights**  
-  Frame media vertikal yang terhubung langsung ke video resmi Instagram [@ppteknikkomputer.umn](https://www.instagram.com/ppteknikkomputer.umn).
-- 📍 **Critical Timelines & Interactive Hari-H Ready Check**  
-  - Status **Briefing Day** (`COMPLETED ✓`).
-  - Alur kegiatan **Main Event (18 Agustus 2026 - After OMB)** dengan fitur interaktif *Countdown Timer* & *Hari-H Ready Checklist*.
-- 👥 **Searchable Groups & Division Dossier**  
-  Fitur pencarian nama mahasiswa baru, PIC, dan daftar anggota kelompok (TIMER, PWM, UART, GPIO) beserta modal detail & tombol salin daftar nama.
-- 🛡️ **Committee Showcase**  
-  Perkenalan panitia PPTK 2026.
+| Layer | Teknologi |
+|-------|-----------|
+| Framework | React 19 + Vite 6 |
+| Styling | TailwindCSS v4 |
+| Icons | Lucide React, Material Symbols |
+| Typography | Syne, JetBrains Mono, Libre Franklin |
+| Deployment | Vercel |
 
----
+## Getting Started
 
-## 🛠️ Teknologi & Stack
-
-- **Core Framework:** [React 19](https://react.dev/) + [Vite 6](https://vitejs.dev/)
-- **Styling:** [TailwindCSS v4](https://tailwindcss.com/)
-- **Icons & Visuals:** Material Symbols Outlined & Custom Brutalist Assets
-- **Typography:**
-  - `Syne` — Display & Headers
-  - `JetBrains Mono` — Monospace Technical Badges & Data
-  - `Libre_Franklin` — Body Text
-
----
-
-## 🚀 Panduan Memulai (Local Development)
-
-### 1. Clone Repository
 ```bash
+# Clone
 git clone https://github.com/raffiabyann/pptk.git
 cd pptk
-```
 
-### 2. Install Dependencies
-```bash
+# Install dependencies
 npm install
-```
 
-### 3. Jalankan Server Development
-```bash
+# Development server
 npm run dev
-```
-Buka browser di `http://localhost:5173`.
 
-### 4. Build untuk Production
-```bash
+# Production build
 npm run build
 ```
-Hasil build production akan tersimpan di direktori `/dist`.
 
----
+## Struktur Project
 
-## 📁 Struktur Direktori Project
+```
+src/
+├── components/
+│   ├── Navbar.jsx              # Navigasi utama + mobile drawer
+│   ├── Hero.jsx                # Hero section & photo slider
+│   ├── WhatIsPPTK.jsx          # Deskripsi singkat PPTK
+│   ├── RulesSection.jsx        # Tata tertib peserta
+│   ├── PreparationSection.jsx  # Dresscode & barang bawaan
+│   ├── ReelsSection.jsx        # Instagram reels highlights
+│   ├── TimelineSection.jsx     # Timeline, countdown & checklist
+│   ├── DivisionsSection.jsx    # Pencarian kelompok & anggota
+│   ├── CommitteeSection.jsx    # Panitia PPTK 2026
+│   ├── AcesSection.jsx         # Profil himpunan ACES Gen XVI
+│   ├── ScrollReveal.jsx        # Scroll-based fade-in animation
+│   ├── Footer.jsx              # Footer & social links
+│   └── Toast.jsx               # Toast notification provider
+├── App.jsx
+├── index.css
+└── main.jsx
 
-```text
-project-web-pptk/
-├── public/
-│   ├── assets/              # Aset gambar dresscode, reels thumbnail, & foto slider
-│   └── logopptk.png         # Logo resmi PPTK 2026
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx       # Navigasi utama + Mobile Drawer Menu
-│   │   ├── Hero.jsx         # Section Hero & Photo Slider
-│   │   ├── WhatIsPPTK.jsx   # Deskripsi Singkat PPTK
-│   │   ├── RulesSection.jsx # Tata Tertib & Guidelines
-│   │   ├── PreparationSection.jsx # Dresscode & Barang Bawaan
-│   │   ├── ReelsSection.jsx # Instagram Reels Highlights
-│   │   ├── TimelineSection.jsx  # Roadmap, Main Event & Interactive Checklist
-│   │   ├── DivisionsSection.jsx # Fitur Cari Kelompok & Modal Anggota
-│   │   ├── CommitteeSection.jsx # Panitia PPTK 2026
-│   │   ├── Footer.jsx       # Footer & Media Sosial
-│   │   └── Toast.jsx        # Provider Toast Notification
-│   ├── App.jsx              # Main App Container
-│   ├── index.css            # Tailwind & Custom CSS Utilities
-│   └── main.jsx             # React Entry Point
-├── package.json
-└── vite.config.js
+public/
+├── images/aces/                # Foto divisi & roster ACES Gen XVI
+├── assets/                     # Aset gambar dresscode, reels, slider
+├── LogoACES.png
+└── logopptk.png
 ```
 
----
+## Tim
 
-## 👨‍💻 Kontribusi & Lisensi
-
-Dibuat oleh Tim **Teknik Komputer Universitas Multimedia Nusantara 2026**.  
-*All rights reserved.*
+Dibuat oleh mahasiswa Teknik Komputer, Universitas Multimedia Nusantara.
