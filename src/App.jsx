@@ -9,7 +9,9 @@ import ReelsSection from './components/ReelsSection';
 import TimelineSection from './components/TimelineSection';
 import DivisionsSection from './components/DivisionsSection';
 import CommitteeSection from './components/CommitteeSection';
+import AcesSection from './components/AcesSection';
 import Footer from './components/Footer';
+import ScrollReveal from './components/ScrollReveal';
 
 export default function App() {
   return (
@@ -21,17 +23,36 @@ export default function App() {
         {/* Main Content */}
         <main className="flex-grow">
           <Hero />
-          <WhatIsPPTK />
-          <RulesSection />
-          <PreparationSection />
-          <ReelsSection />
-          <TimelineSection />
-          <DivisionsSection />
-          <CommitteeSection />
+          <ScrollReveal>
+            <WhatIsPPTK />
+          </ScrollReveal>
+          <ScrollReveal>
+            <RulesSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <PreparationSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <ReelsSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <TimelineSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <DivisionsSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <CommitteeSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <AcesSection />
+          </ScrollReveal>
         </main>
 
         {/* Footer */}
-        <Footer />
+        <ScrollReveal>
+          <Footer />
+        </ScrollReveal>
       </div>
     </ToastProvider>
   );

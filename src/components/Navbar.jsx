@@ -12,12 +12,13 @@ export default function Navbar() {
     { id: 'events', label: 'EVENTS', href: '#events' },
     { id: 'groups', label: 'GROUPS', href: '#groups' },
     { id: 'committee', label: 'COMMITTEE', href: '#committee' },
+    { id: 'aces', label: 'ACES', href: '#aces' },
   ];
 
   // Active section scroll observer
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'guide', 'preparation', 'reels', 'events', 'groups', 'committee'];
+      const sections = ['hero', 'guide', 'preparation', 'reels', 'events', 'groups', 'committee', 'aces'];
       const scrollPosition = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
