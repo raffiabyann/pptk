@@ -4,7 +4,7 @@ import { useToast } from './Toast';
 export default function TimelineSection() {
   const { showToast } = useToast();
   const [activeEvent, setActiveEvent] = useState(null);
-  
+
   // Checklist State for Main Event Ready Check
   const [checkedItems, setCheckedItems] = useState({
     dresscode: false,
@@ -297,7 +297,7 @@ export default function TimelineSection() {
                     PPTK Main Event
                   </h5>
                   <p className="font-['Libre_Franklin'] text-[11px] text-[#45474c] leading-relaxed">
-                    Pengenalan prodi Tekkom UMN, demo laboratorium & hardware, serta sesi keakraban mentor & HIMTEK.
+                    Pengenalan prodi Teknik Komputer UMN, Lab Tour, serta sesi keakraban mentor & ACES
                   </p>
                 </div>
               </div>
