@@ -346,7 +346,7 @@ export default function AcesSection() {
 
             {/* Image Area — swipeable */}
             <div
-              className="flex-grow overflow-hidden bg-[#F7F5F0] relative flex items-center justify-center min-h-[350px] md:min-h-[400px]"
+              className="flex-grow bg-[#F7F5F0] relative flex items-center justify-center p-4"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -354,7 +354,7 @@ export default function AcesSection() {
                 key={currentSlideIdx}
                 src={currentSlide?.url}
                 alt={currentSlide?.name}
-                className="max-h-[55vh] md:max-h-[60vh] w-auto object-contain animate-in fade-in duration-200"
+                className="max-h-[45vh] md:max-h-[50vh] max-w-full w-auto object-contain animate-in fade-in duration-200"
               />
 
               {activeModalDiv.slides.length > 1 && (
