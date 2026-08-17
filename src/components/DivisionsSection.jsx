@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useToast } from './Toast';
 
 export default function DivisionsSection() {
@@ -168,7 +169,7 @@ export default function DivisionsSection() {
       )}
 
       {/* Group Detail Modal */}
-      {selectedGroupModal && (
+      {selectedGroupModal && createPortal(
         <div
           onClick={() => setSelectedGroupModal(null)}
           className="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto"
@@ -236,7 +237,8 @@ export default function DivisionsSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function AcesSection() {
@@ -323,7 +324,7 @@ export default function AcesSection() {
       </div>
 
       {/* Modal Lightbox — starts from individual roster photos */}
-      {activeModalDiv && (
+      {activeModalDiv && createPortal(
         <div
           className="fixed inset-0 z-50 bg-[#001a42]/85 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
           onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
@@ -414,7 +415,8 @@ export default function AcesSection() {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

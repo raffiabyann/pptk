@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useToast } from './Toast';
 
 export default function TimelineSection() {
@@ -215,7 +216,7 @@ export default function TimelineSection() {
       </div>
 
       {/* Main Event Interactive Modal */}
-      {activeEvent && !activeEvent.completed && (
+      {activeEvent && !activeEvent.completed && createPortal(
         <div
           onClick={() => setActiveEvent(null)}
           className="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 backdrop-blur-md overflow-y-auto"
@@ -411,7 +412,8 @@ export default function TimelineSection() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

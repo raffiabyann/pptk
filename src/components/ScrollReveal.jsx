@@ -12,6 +12,11 @@ export default function ScrollReveal({ children, className = '', delay = 0 }) {
         if (entry.isIntersecting) {
           setTimeout(() => {
             el.classList.add('revealed');
+            // Remove CSS transform containing block after animation completes
+            // so fixed-position children (e.g. modals) render full-screen.
+            setTimeout(() => {
+              if (el) el.style.transform = 'none';
+            }, 650);
           }, delay);
           observer.unobserve(el);
         }

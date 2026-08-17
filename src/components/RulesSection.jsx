@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useToast } from './Toast';
 
 export default function RulesSection() {
@@ -88,7 +89,7 @@ export default function RulesSection() {
       </div>
 
       {/* Rule Detail Modal */}
-      {activeRuleModal && (
+      {activeRuleModal && createPortal(
         <div
           onClick={() => setActiveRuleModal(null)}
           className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
@@ -113,7 +114,8 @@ export default function RulesSection() {
               MENGERTI &amp; TUTUP
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
