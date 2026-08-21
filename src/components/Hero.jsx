@@ -39,7 +39,7 @@ export default function Hero() {
       <div className="md:w-1/2 z-10 relative">
         <div className="inline-flex items-center gap-2 bg-[#E85A00] text-black font-['JetBrains_Mono'] text-xs font-bold px-3 py-1 mb-6 shadow-[2px_2px_0px_0px_#001a42] rotate-1">
           <span className="w-2 h-2 rounded-full bg-black"></span>
-          PPTK 2026 // TEKNIK KOMPUTER UMN
+          PPTK 2026 // EVENT COMPLETED ✓
         </div>
 
         <h1 className="font-['Syne'] font-extrabold text-[36px] sm:text-[54px] md:text-[70px] text-[#000000] uppercase leading-[0.92] mb-6 md:mb-8 relative tracking-tight">
@@ -56,21 +56,19 @@ export default function Hero() {
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 font-['JetBrains_Mono'] text-xs font-bold">
           <a
-            href="#events"
-            onClick={(e) => handleSmoothScroll(e, 'events')}
+            href="#gallery"
+            onClick={(e) => handleSmoothScroll(e, 'gallery')}
             className="btn-brutalist px-6 md:px-8 py-3.5 md:py-4 uppercase inline-flex items-center gap-2 chamfered-box cursor-pointer active:scale-95 shadow-md"
           >
-            <span className="material-symbols-outlined">explore</span>
-            Discover Events
+            Lihat Gallery
           </a>
 
           <a
-            href="#guide"
-            onClick={(e) => handleSmoothScroll(e, 'guide')}
+            href="#groups"
+            onClick={(e) => handleSmoothScroll(e, 'groups')}
             className="bg-white text-[#001a42] border-2 border-[#001a42] px-6 md:px-8 py-3.5 md:py-4 uppercase inline-flex items-center gap-2 chamfered-box hover:bg-[#e4e2e3] transition-colors active:scale-95 shadow-md"
           >
-            <span className="material-symbols-outlined">menu_book</span>
-            Read Guidelines
+            Lihat Groups
           </a>
         </div>
       </div>

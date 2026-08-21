@@ -12,12 +12,13 @@ export default function Navbar() {
     { id: 'events', label: 'EVENTS', href: '#events' },
     { id: 'groups', label: 'GROUPS', href: '#groups' },
     { id: 'committee', label: 'COMMITTEE', href: '#committee' },
+    { id: 'gallery', label: 'GALLERY', href: '#gallery' },
     { id: 'aces', label: 'ACES', href: '#aces' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'guide', 'preparation', 'reels', 'events', 'groups', 'committee', 'aces'];
+      const sections = ['hero', 'guide', 'preparation', 'reels', 'events', 'groups', 'committee', 'gallery', 'aces'];
 
       if (window.scrollY < 400) {
         setActiveSection('hero');
@@ -113,11 +114,11 @@ export default function Navbar() {
       {/* Mobile Hamburger Button */}
       <div className="md:hidden flex items-center gap-3">
         <a
-          href="#events"
-          onClick={(e) => handleNavClick(e, '#events', 'events')}
+          href="#gallery"
+          onClick={(e) => handleNavClick(e, '#gallery', 'gallery')}
           className="bg-[#001a42] text-white font-['JetBrains_Mono'] text-[10px] font-bold px-3 py-1.5 chamfered-box"
         >
-          EVENTS
+          GALLERY
         </a>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

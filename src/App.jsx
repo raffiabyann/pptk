@@ -9,6 +9,7 @@ import ReelsSection from './components/ReelsSection';
 import TimelineSection from './components/TimelineSection';
 import DivisionsSection from './components/DivisionsSection';
 import CommitteeSection from './components/CommitteeSection';
+import GallerySection from './components/GallerySection';
 import AcesSection from './components/AcesSection';
 import Footer from './components/Footer';
 import ScrollReveal from './components/ScrollReveal';
@@ -16,7 +17,7 @@ import ScrollReveal from './components/ScrollReveal';
 export default function App() {
   return (
     <ToastProvider>
-      <div className="bg-[#F7F5F0] text-[#1b1b1d] font-['Libre_Franklin'] brutalist-grid min-h-screen flex flex-col relative overflow-x-hidden">
+      <div className="bg-[#F7F5F0] text-[#1b1b1d] font-['Libre_Franklin'] brutalist-grid min-h-screen flex flex-col relative">
         {/* Navigation Bar */}
         <Navbar />
 
@@ -43,6 +44,9 @@ export default function App() {
           </ScrollReveal>
           <ScrollReveal>
             <CommitteeSection />
+          </ScrollReveal>
+          <ScrollReveal>
+            <GallerySection />
           </ScrollReveal>
           <ScrollReveal>
             <AcesSection />

@@ -12,16 +12,11 @@ export default function ScrollReveal({ children, className = '', delay = 0 }) {
         if (entry.isIntersecting) {
           setTimeout(() => {
             el.classList.add('revealed');
-            // Remove CSS transform containing block after animation completes
-            // so fixed-position children (e.g. modals) render full-screen.
-            setTimeout(() => {
-              if (el) el.style.transform = 'none';
-            }, 650);
           }, delay);
           observer.unobserve(el);
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
 
     observer.observe(el);

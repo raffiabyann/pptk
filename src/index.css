@@ -64,7 +64,6 @@ body {
   font-family: 'Libre Franklin', sans-serif;
   background-color: #F7F5F0;
   color: #1b1b1d;
-  overflow-x: hidden;
 }
 
 .brutalist-grid {
@@ -129,9 +128,10 @@ body {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
 }
 
 .scroll-reveal.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
